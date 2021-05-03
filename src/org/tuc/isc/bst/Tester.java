@@ -3,6 +3,9 @@ package org.tuc.isc.bst;
 import org.tuc.isc.util.Generate;
 import org.tuc.isc.util.MultiCounter;
 
+/**
+ * A class that is useda
+ */
 public class Tester {
     private static final int START_INT = 1;
     private static final int END_INT = 1000001;
@@ -12,9 +15,13 @@ public class Tester {
     Generate gen = new Generate();
     int[] RandKeys = gen.RandomInts(START_INT,END_INT,NO_OF_ELEMENTS);
     BstArray bst = new BstArray(RandKeys.length);
+    ThreadedBst tBst = new ThreadedBst(RandKeys.length);
     Array arr = new Array(NO_OF_ELEMENTS);
 
 
+    /**
+     *Method that calls InsertRandomKey method 100 times, from class BstArray
+     */
     public void CallToInsertKeys() {
         for (int i = 0; i < NO_OF_ELEMENTS; i++) {
             bst.InsertRandomKey(0, RandKeys[i]);
@@ -22,6 +29,10 @@ public class Tester {
     }
 
 
+    /**
+     * Method that calls SearchRange method 100 times, from class BstArray
+     * @param K The range to search
+     */
     public void CallToSearchKeysInRange(int K) {
         for (int i = 0; i < NO_OF_RANDOM_SEARCHES; i++) {
             System.out.println(i + ":");
@@ -31,14 +42,35 @@ public class Tester {
         }
     }
 
+    /**
+     *Method that calls SearchRandomKey method 100 times, from class BstArray
+     */
     public void CallToSearchKeys() {
         for (int i = 0; i < NO_OF_RANDOM_SEARCHES; i++) {
             bst.SearchRandomKey(0, RandKeys[i * 10]);
         }
     }
 
-    public void CallBinarySearch(int key){
-        arr.binarySearch(START_INT,NO_OF_ELEMENTS,key);
+    /**
+     * Method that calls InsertRandomKey method 100 times, from class ThreadedBst
+     */
+    public void CallToInsertThreadedBstKeys() {
+        for (int i = 0; i < NO_OF_ELEMENTS; i++) {
+            tBst.InsertRandomKey(0,RandKeys[i * 10]);
+        }
+    }
+
+
+
+
+    /**
+     *Method that calls binarySearch method 100 times from class Array
+     */
+    public void CallBinarySearch(){
+        arr.InitializeArray();
+        for (int i = 0; i < NO_OF_RANDOM_SEARCHES; i++) {
+            arr.BinarySearch(START_INT, NO_OF_ELEMENTS, RandKeys[i]);
+        }
     }
 
 }
