@@ -20,6 +20,7 @@ public class BstMain {
         MultiCounter.resetCounter(1);
         MultiCounter.resetCounter(2);
         MultiCounter.resetCounter(3);
+        MultiCounter.resetCounter(4);
 
 //        test.CallToInsertKeys();
 //        System.out.println("Μεσος αριθμός συγκρίσεων ανα εισαγωγή:"+MultiCounter.getCount(1)/test.RandKeys.length);
@@ -34,16 +35,26 @@ public class BstMain {
 //        test.CallToSearchKeysInRange(K2);
 //        System.out.println("Μέσος αριθμός συγκρίσεων ανά αναζήτηση εύρους(K=1000):"+ MultiCounter.getCount(3)/K1);
 
-        ThreadedBst tbst = new ThreadedBst(8);
+        ThreadedBst tbst = new ThreadedBst(9);
 
         tbst.InsertRandomKey(0,45);
         tbst.InsertRandomKey(0,35);
         tbst.InsertRandomKey(0,55);
+        tbst.InsertRandomKey(0,53);
         tbst.InsertRandomKey(0,42);
         tbst.InsertRandomKey(0,15);
         tbst.InsertRandomKey(0,105);
         tbst.InsertRandomKey(0,36);
         tbst.InsertRandomKey(0,43);
+
+        //test.CallBinarySearch(10);
+        System.out.println("Μέσος αριθμός συγκρίσεων ανά τυχαία αναζήτηση:"+MultiCounter.getCount(4));
+        MultiCounter.resetCounter(4);
+        //test.CallBinarySearch(10);
+        System.out.println("Μέσος αριθμός συγκρίσεων ανά αναζήτηση εύρους(K=100):"+ MultiCounter.getCount(4));
+        MultiCounter.resetCounter(4);
+        //test.CallBinarySearch(10);
+        System.out.println("Μέσος αριθμός συγκρίσεων ανά αναζήτηση εύρους(K=1000):"+ MultiCounter.getCount(4));
 
 
 

@@ -21,96 +21,35 @@ public class ThreadedBst {
 
 
     public  int InsertRandomKey(int rootIndex ,int val) {
-
         if (MultiCounter.increaseCounter(1) && data[rootIndex][Info] == -1) {
             MultiCounter.increaseCounter(1);
             GetNode();
+            data[rootIndex][RightThread] = 1;
+            data[rootIndex][LeftThread] = 1;
             return data[rootIndex][0] = val;
         }
 
         if (MultiCounter.increaseCounter(1) && val > data[rootIndex][Info]) {
-            if (MultiCounter.increaseCounter(1) && data[rootIndex][Right] != -1) {
-                if(MultiCounter.increaseCounter(1) && data[rootIndex][RightThread] == 1){
-                    MultiCounter.increaseCounter(1, 3);
-                    data[rootIndex][Right] = Avail;
-                    data[rootIndex][RightThread] = 0;
-                    data[Avail ][RightThread] = 1;
-                    InsertRandomKey(Avail, val);
-                    if(MultiCounter.increaseCounter(1) && Avail != -1) {
-                        MultiCounter.increaseCounter(1);
-                        data[helperPointer][Right] = rootIndex - 1;
-                    }
 
-                }
-                else {
-                    MultiCounter.increaseCounter(1);
-                    data[rootIndex][Right] = InsertRandomKey(data[rootIndex][Right], val);
-                    if(MultiCounter.increaseCounter(1) && Avail == -1 && MultiCounter.increaseCounter(1) && rootIndex >=1) {
-                        MultiCounter.increaseCounter(1, 3);
-                        data[helperPointer][Right] = rootIndex - 1;
-                        data[helperPointer][Left] = data[rootIndex][Right];
-                        data[helperPointer][LeftThread] = 1;
-                    }
-                }
+            if (MultiCounter.increaseCounter(1) && data[rootIndex][Right] != -1) {
+                MultiCounter.increaseCounter(1);
+                data[rootIndex][Right] = InsertRandomKey(data[rootIndex][Right], val);
             } else {
-                if (MultiCounter.increaseCounter(1) && data[rootIndex][RightThread] == 1) {
-                    MultiCounter.increaseCounter(1, 4);
-                    data[rootIndex][Right] = GetNode();
-                    data[data[rootIndex][Right]][Info] = val;
-                    data[data[rootIndex][Right]][LeftThread] = 1;
-                    data[rootIndex][RightThread] = 0;
-                }
-                else{
-                    MultiCounter.increaseCounter(1, 5);
-                    data[rootIndex][Right] = GetNode();
-                    data[data[rootIndex][Right]][Info] = val;
-                    data[data[rootIndex][Right]][LeftThread] = 1;
-                    data[rootIndex][RightThread] = 0;
-                    data[data[rootIndex][Right]][Left]= rootIndex;
-                }
+                MultiCounter.increaseCounter(1,2);
+                data[rootIndex][Right] = GetNode();
+                data[data[rootIndex][Right]][Info] = val;
+                data[data[rootIndex][Right]][Left] = rootIndex;
             }
         }
         else{
             if (MultiCounter.increaseCounter(1) && data[rootIndex][Left] != -1) {
-                if(MultiCounter.increaseCounter(1) && data[rootIndex][LeftThread] ==1){
-                    MultiCounter.increaseCounter(1, 3);
-                    data[rootIndex][Left] = Avail;
-                    data[rootIndex][LeftThread] = 0;
-                    data[Avail][LeftThread] = 1;
-                    InsertRandomKey(Avail, val);
-                    if(MultiCounter.increaseCounter(1) && Avail != -1) {
-                        MultiCounter.increaseCounter(1);
-                        data[helperPointer][Left] = rootIndex - 1;
-                    }
-
-                }
-                else {
-                    MultiCounter.increaseCounter(1);
-                    data[rootIndex][Left] = InsertRandomKey(data[rootIndex][Left], val);
-                    if(MultiCounter.increaseCounter(1) && Avail == -1 && MultiCounter.increaseCounter(1) && rootIndex >=1) {
-                        MultiCounter.increaseCounter(1, 3);
-                        data[helperPointer][Left] = rootIndex - 1;
-                        data[helperPointer][Right] = data[rootIndex][Left];
-                        data[helperPointer][RightThread] = 1;
-                    }
-
-                }
+                MultiCounter.increaseCounter(1);
+                data[rootIndex][Left] =InsertRandomKey(data[rootIndex][Left], val);
             } else {
-                if(MultiCounter.increaseCounter(1) && data[rootIndex][LeftThread] == 1) {
-                    MultiCounter.increaseCounter(1, 4);
-                    data[rootIndex][Left] = GetNode();
-                    data[data[rootIndex][Left]][Info] = val;
-                    data[data[rootIndex][Left]][RightThread] = 1;
-                    data[rootIndex][LeftThread] = 0;
-                }
-                else{
-                    MultiCounter.increaseCounter(1, 5);
-                    data[rootIndex][Left] = GetNode();
-                    data[data[rootIndex][Left]][Info] = val;
-                    data[data[rootIndex][Left]][RightThread] = 1;
-                    data[rootIndex][LeftThread] = 0;
-                    data[data[rootIndex][Left]][Right] = rootIndex;
-                }
+                MultiCounter.increaseCounter(1,2);
+                data[rootIndex][Left]=GetNode();
+                data[data[rootIndex][Left]][Info] =val;
+                data[data[rootIndex][Left]][Right] = rootIndex;
             }
         }
         return rootIndex;

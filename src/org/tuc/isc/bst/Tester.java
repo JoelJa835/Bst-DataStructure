@@ -12,6 +12,7 @@ public class Tester {
     Generate gen = new Generate();
     int[] RandKeys = gen.RandomInts(START_INT,END_INT,NO_OF_ELEMENTS);
     BstArray bst = new BstArray(RandKeys.length);
+    Array arr = new Array(NO_OF_ELEMENTS);
 
 
     public void CallToInsertKeys() {
@@ -34,6 +35,10 @@ public class Tester {
         for (int i = 0; i < NO_OF_RANDOM_SEARCHES; i++) {
             bst.SearchRandomKey(0, RandKeys[i * 10]);
         }
+    }
+
+    public void CallBinarySearch(int key){
+        arr.binarySearch(START_INT,NO_OF_ELEMENTS,key);
     }
 
 }
