@@ -56,7 +56,28 @@ public class Tester {
      */
     public void CallToInsertThreadedBstKeys() {
         for (int i = 0; i < NO_OF_ELEMENTS; i++) {
-            tBst.InsertRandomKey(0,RandKeys[i * 10]);
+            tBst.InsertRandomKey(0,RandKeys[i]);
+        }
+    }
+
+    /**
+     * @param K
+     */
+    public void CallToSearchThreadedBstKeysInRange(int K) {
+        for (int i = 0; i < NO_OF_RANDOM_SEARCHES; i++) {
+            System.out.println(i + ":");
+            System.out.println(RandKeys[i * 10] + " εως " + (RandKeys[i * 10] + K));
+            tBst.SearchRange(0, RandKeys[i * 10], (RandKeys[i * 10] + K));
+            System.out.println();
+        }
+    }
+
+    /**
+     *
+     */
+    public void CallToSearchThreadedBstKeys() {
+        for (int i = 0; i < NO_OF_RANDOM_SEARCHES; i++) {
+            tBst.SearchRandomKey(0, RandKeys[i * 10]);
         }
     }
 

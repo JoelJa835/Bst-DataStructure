@@ -33,13 +33,13 @@ public class Array {
      * @return
      */
     public int BinarySearch(int first,int last,int key){
-        if (MultiCounter.increaseCounter(5) && last>=first){
-            MultiCounter.increaseCounter(5);
+        if (MultiCounter.increaseCounter(7) && last>=first){
+            MultiCounter.increaseCounter(7);
             int mid = first + (last - first)/2;
-            if (MultiCounter.increaseCounter(5) && table[mid] == key){
+            if (MultiCounter.increaseCounter(7) && table[mid] == key){
                 return mid;
             }
-            if (MultiCounter.increaseCounter(5) && table[mid] > key){
+            if (MultiCounter.increaseCounter(7) && table[mid] > key){
                 return BinarySearch( first, mid-1, key);//search in left subarray
             }else{
                 return BinarySearch(mid+1, last, key);//search in right subarray

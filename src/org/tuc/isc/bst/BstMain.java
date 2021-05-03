@@ -29,29 +29,45 @@ public class BstMain {
         MultiCounter.resetCounter(3);
         MultiCounter.resetCounter(4);
         MultiCounter.resetCounter(5);
+        MultiCounter.resetCounter(6);
+        MultiCounter.resetCounter(7);
 
-//        test.CallToInsertKeys();
-//        System.out.println("Μεσος αριθμός συγκρίσεων ανα εισαγωγή:"+MultiCounter.getCount(1)/test.RandKeys.length);
-//
-//        test.CallToSearchKeys();
-//        System.out.println("Μέσος αριθμός συγκρίσεων ανά τυχαία αναζήτηση:"+MultiCounter.getCount(2)/K1);
-//
-//        test.CallToSearchKeysInRange(K1);
-//        System.out.println("Μέσος αριθμός συγκρίσεων ανά αναζήτηση εύρους(K=100):"+ MultiCounter.getCount(3)/K1);
-//
-//        MultiCounter.resetCounter(3);
-//        test.CallToSearchKeysInRange(K2);
-//        System.out.println("Μέσος αριθμός συγκρίσεων ανά αναζήτηση εύρους(K=1000):"+ MultiCounter.getCount(3)/K1);
+        test.CallToInsertKeys();
+        System.out.println("Μεσος αριθμός συγκρίσεων ανα εισαγωγή για το απλό δέντρο:"+MultiCounter.getCount(1)/test.RandKeys.length);
+
+        test.CallToSearchKeys();
+        System.out.println("Μέσος αριθμός συγκρίσεων ανά τυχαία αναζήτηση για το απλό δέντρο:"+MultiCounter.getCount(2)/K1);
+
+        test.CallToSearchKeysInRange(K1);
+        System.out.println("Μέσος αριθμός συγκρίσεων ανά αναζήτηση εύρους(K=100) για το απλό δέντρο:"+ MultiCounter.getCount(3)/K1);
+
+        MultiCounter.resetCounter(3);
+        test.CallToSearchKeysInRange(K2);
+        System.out.println("Μέσος αριθμός συγκρίσεων ανά αναζήτηση εύρους(K=1000) για το απλό δέντρο:"+ MultiCounter.getCount(3)/K1);
+
+        test.CallToInsertThreadedBstKeys();
+        System.out.println("Μεσος αριθμός συγκρίσεων ανα εισαγωγή για το νηματοειδές δέντρο:"+MultiCounter.getCount(4)/test.RandKeys.length);
+
+        test.CallToSearchThreadedBstKeys();
+        System.out.println("Μέσος αριθμός συγκρίσεων ανά τυχαία αναζήτηση για το νηματοειδές δέντρο:"+MultiCounter.getCount(5)/K1);
+
+        test.CallToSearchThreadedBstKeysInRange(K1);
+        System.out.println("Μέσος αριθμός συγκρίσεων ανά αναζήτηση εύρους(K=100) για το νηματοειδές δέντρο:"+ MultiCounter.getCount(6)/K1);
+
+        MultiCounter.resetCounter(6);
+        test.CallToSearchThreadedBstKeysInRange(K2);
+        System.out.println("Μέσος αριθμός συγκρίσεων ανά αναζήτηση εύρους(K=1000) για το νηματοειδές δέντρο:"+ MultiCounter.getCount(6)/K2);
+
 
 
         //test.CallBinarySearch(10);
-        //System.out.println("Μέσος αριθμός συγκρίσεων ανά τυχαία αναζήτηση:"+MultiCounter.getCount(4)/K1);
-        //MultiCounter.resetCounter(5);
+        //System.out.println("Μέσος αριθμός συγκρίσεων ανά τυχαία αναζήτηση:"+MultiCounter.getCount(7)/K1);
+        //MultiCounter.resetCounter(7);
         //test.CallBinarySearch(10);
-        //System.out.println("Μέσος αριθμός συγκρίσεων ανά αναζήτηση εύρους(K=100):"+ MultiCounter.getCount(5));
-        //MultiCounter.resetCounter(5);
+        //System.out.println("Μέσος αριθμός συγκρίσεων ανά αναζήτηση εύρους(K=100):"+ MultiCounter.getCount(7));
+        //MultiCounter.resetCounter(7);
         //test.CallBinarySearch(10);
-        //System.out.println("Μέσος αριθμός συγκρίσεων ανά αναζήτηση εύρους(K=1000):"+ MultiCounter.getCount(5));
+        //System.out.println("Μέσος αριθμός συγκρίσεων ανά αναζήτηση εύρους(K=1000):"+ MultiCounter.getCount(7));
 
     }
 }

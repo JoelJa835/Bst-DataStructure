@@ -37,54 +37,54 @@ public class ThreadedBst {
      * @return
      */
     public  int InsertRandomKey(int rootIndex ,int val) {
-        if(MultiCounter.increaseCounter(5) &&  rootIndex!= -1 && MultiCounter.increaseCounter(5) &&  Avail !=0){
-            if (MultiCounter.increaseCounter(5) && val > data[rootIndex][Info]) {
-                MultiCounter.increaseCounter(5);
+        if(MultiCounter.increaseCounter(4) &&  rootIndex!= -1 && MultiCounter.increaseCounter(5) &&  Avail !=0){
+            if (MultiCounter.increaseCounter(4) && val > data[rootIndex][Info]) {
+                MultiCounter.increaseCounter(4);
                 parentIndex = rootIndex;
-                if(MultiCounter.increaseCounter(5) && data[rootIndex][RightThread]==1) {                     //This check ensures we wont go into infinite recursion
-                    MultiCounter.increaseCounter(5);
+                if(MultiCounter.increaseCounter(4) && data[rootIndex][RightThread]==1) {                     //This check ensures we wont go into infinite recursion
+                    MultiCounter.increaseCounter(4);
                     data[rootIndex][Right] = -1;
                 }
                 InsertRandomKey(data[rootIndex][Right], val);
             } else {
-                MultiCounter.increaseCounter(5);
+                MultiCounter.increaseCounter(4);
                 parentIndex = rootIndex;
-                if(MultiCounter.increaseCounter(5) && data[rootIndex][LeftThread]==1) {                     //This check ensures we wont go into infinite recursion
-                    MultiCounter.increaseCounter(5);
+                if(MultiCounter.increaseCounter(4) && data[rootIndex][LeftThread]==1) {                     //This check ensures we wont go into infinite recursion
+                    MultiCounter.increaseCounter(4);
                     data[rootIndex][Left] = -1;
                 }
                 InsertRandomKey(data[rootIndex][Left], val);
             }
         }
         else {
-            MultiCounter.increaseCounter(5,3);
+            MultiCounter.increaseCounter(4,3);
             tmpPointer = GetNode();
             data[tmpPointer][Info] = val;
             data[tmpPointer][RightThread] = 1;
             data[tmpPointer][LeftThread] = 1;
 
-            if (MultiCounter.increaseCounter(5) && parentIndex == -1) {
-                MultiCounter.increaseCounter(5,2);
+            if (MultiCounter.increaseCounter(4) && parentIndex == -1) {
+                MultiCounter.increaseCounter(4,2);
                 data[tmpPointer][Left] = -1;
                 data[tmpPointer][Right] = -1;
-            } else if (MultiCounter.increaseCounter(5) && val > data[parentIndex][Info]) {
-                MultiCounter.increaseCounter(5);
+            } else if (MultiCounter.increaseCounter(4) && val > data[parentIndex][Info]) {
+                MultiCounter.increaseCounter(4);
                 data[tmpPointer][Left] = parentIndex;
-                if (MultiCounter.increaseCounter(5) && data[parentIndex][RightThread] == 1) {
-                    MultiCounter.increaseCounter(5);
+                if (MultiCounter.increaseCounter(4) && data[parentIndex][RightThread] == 1) {
+                    MultiCounter.increaseCounter(4);
                     data[tmpPointer][Right] = data[parentIndex][Right];
                 }
-                MultiCounter.increaseCounter(5,2);
+                MultiCounter.increaseCounter(4,2);
                 data[parentIndex][RightThread] = 0;
                 data[parentIndex][Right] = tmpPointer;
             } else {
-                MultiCounter.increaseCounter(5);
+                MultiCounter.increaseCounter(4);
                 data[tmpPointer][Right] = parentIndex;
-                if (MultiCounter.increaseCounter(5) && data[parentIndex][LeftThread] == 1) {
-                    MultiCounter.increaseCounter(5);
+                if (MultiCounter.increaseCounter(4) && data[parentIndex][LeftThread] == 1) {
+                    MultiCounter.increaseCounter(4);
                     data[tmpPointer][Left] = data[parentIndex][Left];
                 }
-                MultiCounter.increaseCounter(5,2);
+                MultiCounter.increaseCounter(4,2);
                 data[parentIndex][LeftThread] = 0;
                 data[parentIndex][Left] = tmpPointer;
             }
