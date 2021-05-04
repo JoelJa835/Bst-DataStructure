@@ -35,8 +35,8 @@ public class Tester {
      */
     public void CallToSearchKeysInRange(int K) {
         for (int i = 0; i < NO_OF_RANDOM_SEARCHES; i++) {
-            System.out.println(i + ":");
-            System.out.println(RandKeys[i * 10] + " εως " + (RandKeys[i * 10] + K));
+            //System.out.println(i + ":");
+            //System.out.println(RandKeys[i * 10] + " εως " + (RandKeys[i * 10] + K));
             bst.SearchRange(0, RandKeys[i * 10], (RandKeys[i * 10] + K));
             System.out.println();
         }
@@ -65,8 +65,8 @@ public class Tester {
      */
     public void CallToSearchThreadedBstKeysInRange(int K) {
         for (int i = 0; i < NO_OF_RANDOM_SEARCHES; i++) {
-            System.out.println(i + ":");
-            System.out.println(RandKeys[i * 10] + " εως " + (RandKeys[i * 10] + K));
+            //System.out.println(i + ":");
+            //System.out.println(RandKeys[i * 10] + " εως " + (RandKeys[i * 10] + K));
             tBst.SearchRange(0, RandKeys[i * 10], (RandKeys[i * 10] + K));
             System.out.println();
         }
@@ -77,6 +77,7 @@ public class Tester {
      */
     public void CallToSearchThreadedBstKeys() {
         for (int i = 0; i < NO_OF_RANDOM_SEARCHES; i++) {
+            //System.out.println("Key:"+RandKeys[i*10]);
             tBst.SearchRandomKey(0, RandKeys[i * 10]);
         }
     }

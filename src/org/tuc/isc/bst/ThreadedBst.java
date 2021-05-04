@@ -89,8 +89,6 @@ public class ThreadedBst {
                 data[parentIndex][Left] = tmpPointer;
             }
         }
-
-
         return rootIndex;
     }
 
@@ -100,21 +98,24 @@ public class ThreadedBst {
      * @return
      */
     public int SearchRandomKey(int rootIndex,int val){
-        if(MultiCounter.increaseCounter(2) && data[rootIndex][Right] ==  -1 && data[rootIndex][Left] ==-1){
-            System.out.println("Value wasnt found in tree");
-            return rootIndex;
+        while(MultiCounter.increaseCounter(5) && rootIndex!=-1) {
+            if (MultiCounter.increaseCounter(5) && data[rootIndex][Right] == -1 && MultiCounter.increaseCounter(4) &&data[rootIndex][Left] == -1) {
+                System.out.println("Value wasnt found in tree");
+                return rootIndex;
+            }
+            if (MultiCounter.increaseCounter(5) &&  data[rootIndex][Info] == val) {
+                System.out.println("Found value:" + data[rootIndex][Info] + " at index: " + rootIndex);
+                return rootIndex;
+            }
+            if (MultiCounter.increaseCounter(5) &&val < data[rootIndex][Info]) {
+                MultiCounter.increaseCounter(5);
+                rootIndex = data[rootIndex][Left];
+            } else {
+                MultiCounter.increaseCounter(5);
+                rootIndex = data[rootIndex][Right];
+            }
         }
-        if(MultiCounter.increaseCounter(2) && data[rootIndex][Info] == val) {
-            System.out.println("Found value:"+data[rootIndex][Info]+" at index: "+rootIndex );
-            return rootIndex;
-        }
-        if(MultiCounter.increaseCounter(2) && val < data[rootIndex][Info]){
-            return SearchRandomKey(data[rootIndex][Left],val);
-        }
-        else{
-            return SearchRandomKey(data[rootIndex][Right],val);
-        }
-
+    return rootIndex;
     }
 
     /**
@@ -124,24 +125,22 @@ public class ThreadedBst {
      * @return
      */
     public int SearchRange(int rootIndex,int low,int high){
-
-        if (MultiCounter.increaseCounter(3) && data[rootIndex][Info] == -1) {
-            return -1;
-        }
-
-        if (MultiCounter.increaseCounter(3) && low <=data[rootIndex][Info]) {
-            if(MultiCounter.increaseCounter(3) && data[rootIndex][Left] != -1) {
-                SearchRange(data[rootIndex][Left],low,high);
+        while(rootIndex!= -1) {
+            if (MultiCounter.increaseCounter(3) && data[rootIndex][Info] == -1) {
+                return -1;
             }
-        }
 
-        if (MultiCounter.increaseCounter(3) && low <= data[rootIndex][Info] && MultiCounter.increaseCounter(3) && high >= data[rootIndex][Info]) {
-            System.out.print(data[rootIndex][Info] + " ");
-        }
-
-        if (MultiCounter.increaseCounter(3) && high >= data[rootIndex][Info]) {
-            if(MultiCounter.increaseCounter(3) && data[rootIndex][Right] != -1) {
-                SearchRange(data[rootIndex][Right],low,high);
+            if(low <=data[rootIndex][Info]){
+                if(high >=data[rootIndex][Info] ){
+                    System.out.print(data[rootIndex][Info] + " ");
+                    rootIndex = data[rootIndex][Right];
+                }
+                else{
+                    rootIndex = data[rootIndex][Left];
+                }
+            }
+            else{
+                rootIndex = data[rootIndex][Right];
             }
 
         }
