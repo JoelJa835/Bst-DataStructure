@@ -20,8 +20,8 @@ public class MultiCounter {
      * Resets the internal counter of counterIndex to zero
      */
     public static void resetCounter(int counterIndex) {
-        if (counterIndex-1 < counters.length)
-            counters[counterIndex-1] = 0;
+        if (counterIndex - 1 < counters.length)
+            counters[counterIndex - 1] = 0;
     }
 
     /**
@@ -30,8 +30,8 @@ public class MultiCounter {
      * @return the current count for given counterIndex
      */
     public static int getCount(int counterIndex) {
-        if (counterIndex-1 < counters.length)
-            return counters[counterIndex-1];
+        if (counterIndex - 1 < counters.length)
+            return counters[counterIndex - 1];
         return -1;
     }
 
@@ -42,8 +42,8 @@ public class MultiCounter {
      * @return always true
      */
     public static boolean increaseCounter(int counterIndex) {
-        if (counterIndex-1 < counters.length)
-            counters[counterIndex-1]++;
+        if (counterIndex - 1 < counters.length)
+            counters[counterIndex - 1]++;
         return true;
     }
 
@@ -56,8 +56,10 @@ public class MultiCounter {
      * @return always true
      */
     public static boolean increaseCounter(int counterIndex, int step) {
-        if (counterIndex-1 < counters.length)
-            counters[counterIndex-1] = counters[counterIndex-1] + step;
+        if (counterIndex - 1 < counters.length)
+            counters[counterIndex - 1] = counters[counterIndex - 1] + step;
         return true;
     }
+
+
 }

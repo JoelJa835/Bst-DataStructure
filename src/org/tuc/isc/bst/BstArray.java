@@ -39,37 +39,34 @@ public class BstArray {
      * @param val  The key that we insert to the array
      * @return
      */
-    public  int InsertRandomKey(int rootIndex ,int val) {
-
-        if (MultiCounter.increaseCounter(1) && data[rootIndex][Info] == -1) {
-            MultiCounter.increaseCounter(1);
-            GetNode();
-            return data[rootIndex][0] = val;
-        }
-
-        if (MultiCounter.increaseCounter(1) && val > data[rootIndex][Info]) {
-
-            if (MultiCounter.increaseCounter(1) && data[rootIndex][Right] != -1) {
+        public int InsertRandomKey(int rootIndex, int val) {
+            if (MultiCounter.increaseCounter(1) && this.data[rootIndex][0] == -1) {
                 MultiCounter.increaseCounter(1);
-                data[rootIndex][Right] = InsertRandomKey(data[rootIndex][Right], val);
+                this.GetNode();
+                return this.data[rootIndex][0] = val;
             } else {
-                MultiCounter.increaseCounter(1,2);
-                data[rootIndex][Right] = GetNode();
-                data[data[rootIndex][Right]][Info] = val;
+                if (MultiCounter.increaseCounter(1) && val > this.data[rootIndex][0]) {
+                    if (MultiCounter.increaseCounter(1) && this.data[rootIndex][2] != -1) {
+                        MultiCounter.increaseCounter(1);
+                        this.data[rootIndex][2] = this.InsertRandomKey(this.data[rootIndex][2], val);
+                    } else {
+                        MultiCounter.increaseCounter(1, 2);
+                        this.data[rootIndex][2] = this.GetNode();
+                        this.data[this.data[rootIndex][2]][0] = val;
+                    }
+                } else if (MultiCounter.increaseCounter(1) && this.data[rootIndex][1] != -1) {
+                    MultiCounter.increaseCounter(1);
+                    this.data[rootIndex][1] = this.InsertRandomKey(this.data[rootIndex][1], val);
+                } else {
+                    MultiCounter.increaseCounter(1, 2);
+                    this.data[rootIndex][1] = this.GetNode();
+                    this.data[this.data[rootIndex][1]][0] = val;
+                }
+
+                return rootIndex;
             }
         }
-        else{
-            if (MultiCounter.increaseCounter(1) && data[rootIndex][Left] != -1) {
-                MultiCounter.increaseCounter(1);
-                data[rootIndex][Left] =InsertRandomKey(data[rootIndex][Left], val);
-            } else {
-                MultiCounter.increaseCounter(1,2);
-                data[rootIndex][Left]=GetNode();
-                data[data[rootIndex][Left]][Info] =val;
-            }
-        }
-        return rootIndex;
-    }
+
 
     /**
      * Searches for a random key  and prints the index at where the key was found
@@ -78,16 +75,16 @@ public class BstArray {
      * @return Returns the index where the key was or wasn't found
      */
     public int SearchRandomKey(int rootIndex,int val){
-        if(MultiCounter.increaseCounter(2) && data[rootIndex][Right] ==  -1 && data[rootIndex][Left] ==-1){
+        if(MultiCounter.increaseCounter(2) && rootIndex == -1){
             System.out.println("Value wasnt found in tree");
-            return rootIndex;
-        }
-        if(MultiCounter.increaseCounter(2) && data[rootIndex][Info] == val) {
-            System.out.println("Found value:"+data[rootIndex][Info]+" at index: "+rootIndex );
-            return rootIndex;
+           return rootIndex;
         }
         if(MultiCounter.increaseCounter(2) && val < data[rootIndex][Info]){
             return SearchRandomKey(data[rootIndex][Left],val);
+        }
+        else if(MultiCounter.increaseCounter(2) && data[rootIndex][Info] == val) {
+            System.out.println("Found value:"+data[rootIndex][Info]+" at index: "+rootIndex );
+            return rootIndex;
         }
         else{
             return SearchRandomKey(data[rootIndex][Right],val);

@@ -15,11 +15,13 @@ public class ThreadedBst {
     private static final int Right = 2;
     private static final int Left = 1;
     private static final int Info = 0;
-    private int data [][];
+    private int[][] data;
     int parentIndex = -1;
+    int helperPointerRight,helperPointerLeft =0;
+
     int tmpPointer=-1;
     private int Avail =0;
-    private int rootIndex = -1;
+
 
 
     /**
@@ -41,6 +43,7 @@ public class ThreadedBst {
             if (MultiCounter.increaseCounter(4) && val > data[rootIndex][Info]) {
                 MultiCounter.increaseCounter(4);
                 parentIndex = rootIndex;
+                helperPointerRight = data[rootIndex][Right];
                 if(MultiCounter.increaseCounter(4) && data[rootIndex][RightThread]==1) {                     //This check ensures we wont go into infinite recursion
                     MultiCounter.increaseCounter(4);
                     data[rootIndex][Right] = -1;
@@ -49,6 +52,7 @@ public class ThreadedBst {
             } else {
                 MultiCounter.increaseCounter(4);
                 parentIndex = rootIndex;
+                helperPointerLeft = data[rootIndex][Left];
                 if(MultiCounter.increaseCounter(4) && data[rootIndex][LeftThread]==1) {                     //This check ensures we wont go into infinite recursion
                     MultiCounter.increaseCounter(4);
                     data[rootIndex][Left] = -1;
@@ -72,7 +76,7 @@ public class ThreadedBst {
                 data[tmpPointer][Left] = parentIndex;
                 if (MultiCounter.increaseCounter(4) && data[parentIndex][RightThread] == 1) {
                     MultiCounter.increaseCounter(4);
-                    data[tmpPointer][Right] = data[parentIndex][Right];
+                    data[tmpPointer][Right] = helperPointerRight;
                 }
                 MultiCounter.increaseCounter(4,2);
                 data[parentIndex][RightThread] = 0;
@@ -82,7 +86,7 @@ public class ThreadedBst {
                 data[tmpPointer][Right] = parentIndex;
                 if (MultiCounter.increaseCounter(4) && data[parentIndex][LeftThread] == 1) {
                     MultiCounter.increaseCounter(4);
-                    data[tmpPointer][Left] = data[parentIndex][Left];
+                    data[tmpPointer][Left] = helperPointerLeft;
                 }
                 MultiCounter.increaseCounter(4,2);
                 data[parentIndex][LeftThread] = 0;
@@ -100,7 +104,7 @@ public class ThreadedBst {
     public int SearchRandomKey(int rootIndex,int val){
         while(MultiCounter.increaseCounter(5) && rootIndex!=-1) {
             if (MultiCounter.increaseCounter(5) && data[rootIndex][Right] == -1 && MultiCounter.increaseCounter(4) &&data[rootIndex][Left] == -1) {
-                System.out.println("Value wasnt found in tree");
+                System.out.println("Value wasn't found in tree");
                 return rootIndex;
             }
             if (MultiCounter.increaseCounter(5) &&  data[rootIndex][Info] == val) {
@@ -124,28 +128,43 @@ public class ThreadedBst {
      * @param high
      * @return
      */
-    public int SearchRange(int rootIndex,int low,int high){
-        while(rootIndex!= -1) {
-            if (MultiCounter.increaseCounter(3) && data[rootIndex][Info] == -1) {
-                return -1;
-            }
-
-            if(low <=data[rootIndex][Info]){
-                if(high >=data[rootIndex][Info] ){
-                    System.out.print(data[rootIndex][Info] + " ");
-                    rootIndex = data[rootIndex][Right];
+    public int SearchRange(int rootIndex,int low,int high) {
+        MultiCounter.increaseCounter(6);
+        int curIndex = leftMostNode(rootIndex);
+        while (MultiCounter.increaseCounter(6) && curIndex != -1) {
+            if (MultiCounter.increaseCounter(6) && data[curIndex][Info] >= low) {
+                if (MultiCounter.increaseCounter(6) && data[curIndex][Info] > high) {
+                    break;
                 }
-                else{
-                    rootIndex = data[rootIndex][Left];
-                }
+                System.out.println(data[curIndex][Info]);
             }
-            else{
-                rootIndex = data[rootIndex][Right];
-            }
+            if (MultiCounter.increaseCounter(6) && data[curIndex][RightThread] == 1) {
+                MultiCounter.increaseCounter(6);
+                curIndex = data[curIndex][Right];
+            } else {
+                MultiCounter.increaseCounter(6);
+                curIndex = leftMostNode(data[curIndex][Right]);
 
+            }
         }
-        return rootIndex;
+        return curIndex;
     }
+
+    public int leftMostNode(int nodeIndex){
+        if(MultiCounter.increaseCounter(6) && nodeIndex==-1){
+            return 0;
+        }else{
+            while(MultiCounter.increaseCounter(6) && data[nodeIndex][Left]!=-1 && MultiCounter.increaseCounter(6) && data[nodeIndex][LeftThread] !=1){
+                MultiCounter.increaseCounter(6);
+                nodeIndex = data[nodeIndex][Left];
+            }
+            return nodeIndex;
+        }
+    }
+
+
+
+
 
     /**
      * @return

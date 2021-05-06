@@ -3,8 +3,10 @@ package org.tuc.isc.bst;
 import org.tuc.isc.util.Generate;
 import org.tuc.isc.util.MultiCounter;
 
+import java.util.Random;
+
 /**
- * A class that is useda
+ * A class that is used to help clean up our main function
  */
 public class Tester {
     private static final int START_INT = 1;
@@ -35,9 +37,10 @@ public class Tester {
      */
     public void CallToSearchKeysInRange(int K) {
         for (int i = 0; i < NO_OF_RANDOM_SEARCHES; i++) {
+            int num = getRandomKeys(NO_OF_RANDOM_SEARCHES,RandKeys)[i];
             //System.out.println(i + ":");
-            //System.out.println(RandKeys[i * 10] + " εως " + (RandKeys[i * 10] + K));
-            bst.SearchRange(0, RandKeys[i * 10], (RandKeys[i * 10] + K));
+            System.out.println(num + " εως " + (num + K));
+            bst.SearchRange(0,num , (num + K));
             System.out.println();
         }
     }
@@ -47,7 +50,7 @@ public class Tester {
      */
     public void CallToSearchKeys() {
         for (int i = 0; i < NO_OF_RANDOM_SEARCHES; i++) {
-            bst.SearchRandomKey(0, RandKeys[i * 10]);
+            bst.SearchRandomKey(0, getRandomKeys(NO_OF_RANDOM_SEARCHES,RandKeys)[i]);
         }
     }
 
@@ -61,24 +64,26 @@ public class Tester {
     }
 
     /**
-     * @param K
+     * Method that calls SearchRange method 100 times from class ThreadedBst
+     * @param K Determines what value we will add in our num parameter
      */
     public void CallToSearchThreadedBstKeysInRange(int K) {
         for (int i = 0; i < NO_OF_RANDOM_SEARCHES; i++) {
+            int num = getRandomKeys(NO_OF_RANDOM_SEARCHES,RandKeys)[i];
             //System.out.println(i + ":");
-            //System.out.println(RandKeys[i * 10] + " εως " + (RandKeys[i * 10] + K));
-            tBst.SearchRange(0, RandKeys[i * 10], (RandKeys[i * 10] + K));
+            //System.out.println(num + " εως " + (num + K));
+            tBst.SearchRange(0, num, (num+K));
             System.out.println();
         }
     }
 
     /**
-     *
+     *Method that calls SearchRandomKey method 100 times from class ThreadedBst
      */
     public void CallToSearchThreadedBstKeys() {
         for (int i = 0; i < NO_OF_RANDOM_SEARCHES; i++) {
             //System.out.println("Key:"+RandKeys[i*10]);
-            tBst.SearchRandomKey(0, RandKeys[i * 10]);
+            tBst.SearchRandomKey(0, getRandomKeys(NO_OF_RANDOM_SEARCHES,RandKeys)[i]);
         }
     }
 
@@ -93,6 +98,23 @@ public class Tester {
         for (int i = 0; i < NO_OF_RANDOM_SEARCHES; i++) {
             arr.BinarySearch(START_INT, NO_OF_ELEMENTS, RandKeys[i]);
         }
+    }
+
+    /**
+     * Method that fills an array of size n with random generated keys
+     * @param n Size of array
+     * @param keys Array of generated keys
+     * @return returns an array of size n filled with random keys
+     */
+    public static int[] getRandomKeys(int n, int[] keys) {
+
+        Random rand = new Random();
+        int[] array = new int[n];
+
+        for(int i=0; i<n; i++) {
+            array[i] = keys[rand.nextInt(keys.length)];
+        }
+        return array;
     }
 
 }
