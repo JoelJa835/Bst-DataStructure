@@ -17,14 +17,7 @@ public class Array {
        this.table = new int[N];
     }
 
-    /**
-     *
-     */
-    public void InitializeArray(){
-        for(int i=0; i<Size; i++){
-            table[i]=i+1;
-        }
-    }
+
 
     /**
      * @param first

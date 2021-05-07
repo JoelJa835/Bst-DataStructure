@@ -102,19 +102,20 @@ public class ThreadedBst {
      * @return
      */
     public int SearchRandomKey(int rootIndex,int val){
+
         while(MultiCounter.increaseCounter(5) && rootIndex!=-1) {
-            if (MultiCounter.increaseCounter(5) && data[rootIndex][Right] == -1 && MultiCounter.increaseCounter(4) &&data[rootIndex][Left] == -1) {
-                System.out.println("Value wasn't found in tree");
-                return rootIndex;
-            }
             if (MultiCounter.increaseCounter(5) &&  data[rootIndex][Info] == val) {
-                System.out.println("Found value:" + data[rootIndex][Info] + " at index: " + rootIndex);
+                //System.out.println("Found value:" + data[rootIndex][Info] + " at index: " + rootIndex);
                 return rootIndex;
             }
-            if (MultiCounter.increaseCounter(5) &&val < data[rootIndex][Info]) {
+            if(MultiCounter.increaseCounter(5) && data[rootIndex][LeftThread] == 1 && val< data[rootIndex][Info]  || MultiCounter.increaseCounter(5) && data[rootIndex][RightThread]==1 && val > data[rootIndex][Info] ){
+                System.out.println("Key wasn't found");
+                break;
+            }
+            if (MultiCounter.increaseCounter(5) && val < data[rootIndex][Info]) {
                 MultiCounter.increaseCounter(5);
                 rootIndex = data[rootIndex][Left];
-            } else {
+            } else if(MultiCounter.increaseCounter(5) && val > data[rootIndex][Info]){
                 MultiCounter.increaseCounter(5);
                 rootIndex = data[rootIndex][Right];
             }
@@ -123,6 +124,7 @@ public class ThreadedBst {
     }
 
     /**
+     *
      * @param rootIndex
      * @param low
      * @param high
@@ -130,13 +132,17 @@ public class ThreadedBst {
      */
     public int SearchRange(int rootIndex,int low,int high) {
         MultiCounter.increaseCounter(6);
-        int curIndex = leftMostNode(rootIndex);
+        int curIndex = SearchRandomKey(rootIndex,low);
+        if(curIndex == -1){
+            MultiCounter.increaseCounter(6);
+            curIndex = leftMostNode(rootIndex);
+        }
         while (MultiCounter.increaseCounter(6) && curIndex != -1) {
             if (MultiCounter.increaseCounter(6) && data[curIndex][Info] >= low) {
                 if (MultiCounter.increaseCounter(6) && data[curIndex][Info] > high) {
                     break;
                 }
-                System.out.println(data[curIndex][Info]);
+                //System.out.println(data[curIndex][Info]);
             }
             if (MultiCounter.increaseCounter(6) && data[curIndex][RightThread] == 1) {
                 MultiCounter.increaseCounter(6);

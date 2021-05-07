@@ -83,7 +83,7 @@ public class BstArray {
             return SearchRandomKey(data[rootIndex][Left],val);
         }
         else if(MultiCounter.increaseCounter(2) && data[rootIndex][Info] == val) {
-            System.out.println("Found value:"+data[rootIndex][Info]+" at index: "+rootIndex );
+            //System.out.println("Found value:"+data[rootIndex][Info]+" at index: "+rootIndex );
             return rootIndex;
         }
         else{
@@ -112,7 +112,7 @@ public class BstArray {
         }
 
         if (MultiCounter.increaseCounter(3) && low <= data[rootIndex][Info] && MultiCounter.increaseCounter(3) && high >= data[rootIndex][Info]) {
-            System.out.print(data[rootIndex][Info] + " ");
+            //System.out.print(data[rootIndex][Info] + " ");
         }
 
         if (MultiCounter.increaseCounter(3) && high >= data[rootIndex][Info]) {

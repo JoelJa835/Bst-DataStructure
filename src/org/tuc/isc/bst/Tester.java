@@ -3,6 +3,7 @@ package org.tuc.isc.bst;
 import org.tuc.isc.util.Generate;
 import org.tuc.isc.util.MultiCounter;
 
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -39,9 +40,9 @@ public class Tester {
         for (int i = 0; i < NO_OF_RANDOM_SEARCHES; i++) {
             int num = getRandomKeys(NO_OF_RANDOM_SEARCHES,RandKeys)[i];
             //System.out.println(i + ":");
-            System.out.println(num + " εως " + (num + K));
+            //System.out.println(num + " εως " + (num + K));
             bst.SearchRange(0,num , (num + K));
-            System.out.println();
+            //System.out.println();
         }
     }
 
@@ -73,7 +74,7 @@ public class Tester {
             //System.out.println(i + ":");
             //System.out.println(num + " εως " + (num + K));
             tBst.SearchRange(0, num, (num+K));
-            System.out.println();
+            //System.out.println();
         }
     }
 
@@ -82,19 +83,25 @@ public class Tester {
      */
     public void CallToSearchThreadedBstKeys() {
         for (int i = 0; i < NO_OF_RANDOM_SEARCHES; i++) {
-            //System.out.println("Key:"+RandKeys[i*10]);
             tBst.SearchRandomKey(0, getRandomKeys(NO_OF_RANDOM_SEARCHES,RandKeys)[i]);
         }
     }
 
 
-
-
+    /**
+     *
+     */
+    public void initializeArrayBS(){
+        for(int i=0; i<NO_OF_ELEMENTS; i++ ){
+            arr.table[i] = getRandomKeys(NO_OF_ELEMENTS,RandKeys)[i];
+        }
+        Arrays.sort(arr.table);
+    }
     /**
      *Method that calls binarySearch method 100 times from class Array
      */
     public void CallBinarySearch(){
-        arr.InitializeArray();
+        initializeArrayBS();
         for (int i = 0; i < NO_OF_RANDOM_SEARCHES; i++) {
             arr.BinarySearch(START_INT, NO_OF_ELEMENTS, RandKeys[i]);
         }
