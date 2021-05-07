@@ -156,6 +156,10 @@ public class ThreadedBst {
         return curIndex;
     }
 
+    /**
+     * @param nodeIndex
+     * @return
+     */
     public int leftMostNode(int nodeIndex){
         if(MultiCounter.increaseCounter(6) && nodeIndex==-1){
             return 0;

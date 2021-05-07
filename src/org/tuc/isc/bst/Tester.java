@@ -89,7 +89,7 @@ public class Tester {
 
 
     /**
-     *
+     *Initialize the array variable 'talbe' from class Array with random keys and then sort it
      */
     public void initializeArrayBS(){
         for(int i=0; i<NO_OF_ELEMENTS; i++ ){

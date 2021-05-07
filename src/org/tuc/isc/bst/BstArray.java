@@ -35,99 +35,94 @@ public class BstArray {
 
     /**
      * Inserts a random generated key in data array
-     * @param rootIndex
+     * @param nodeIndex a variable which points to our nodes and at start points to the root
      * @param val  The key that we insert to the array
-     * @return
+     * @return the variable that points to our nodes
      */
-        public int InsertRandomKey(int rootIndex, int val) {
-            if (MultiCounter.increaseCounter(1) && this.data[rootIndex][0] == -1) {
+        public int InsertRandomKey(int nodeIndex, int val) {
+            if (MultiCounter.increaseCounter(1) && this.data[nodeIndex][0] == -1) {
                 MultiCounter.increaseCounter(1);
                 this.GetNode();
-                return this.data[rootIndex][0] = val;
+                return this.data[nodeIndex][0] = val;
             } else {
-                if (MultiCounter.increaseCounter(1) && val > this.data[rootIndex][0]) {
-                    if (MultiCounter.increaseCounter(1) && this.data[rootIndex][2] != -1) {
+                if (MultiCounter.increaseCounter(1) && val > this.data[nodeIndex][0]) {
+                    if (MultiCounter.increaseCounter(1) && this.data[nodeIndex][2] != -1) {
                         MultiCounter.increaseCounter(1);
-                        this.data[rootIndex][2] = this.InsertRandomKey(this.data[rootIndex][2], val);
+                        this.data[nodeIndex][2] = this.InsertRandomKey(this.data[nodeIndex][2], val);
                     } else {
                         MultiCounter.increaseCounter(1, 2);
-                        this.data[rootIndex][2] = this.GetNode();
-                        this.data[this.data[rootIndex][2]][0] = val;
+                        this.data[nodeIndex][2] = this.GetNode();
+                        this.data[this.data[nodeIndex][2]][0] = val;
                     }
-                } else if (MultiCounter.increaseCounter(1) && this.data[rootIndex][1] != -1) {
+                } else if (MultiCounter.increaseCounter(1) && this.data[nodeIndex][1] != -1) {
                     MultiCounter.increaseCounter(1);
-                    this.data[rootIndex][1] = this.InsertRandomKey(this.data[rootIndex][1], val);
+                    this.data[nodeIndex][1] = this.InsertRandomKey(this.data[nodeIndex][1], val);
                 } else {
                     MultiCounter.increaseCounter(1, 2);
-                    this.data[rootIndex][1] = this.GetNode();
-                    this.data[this.data[rootIndex][1]][0] = val;
+                    this.data[nodeIndex][1] = this.GetNode();
+                    this.data[this.data[nodeIndex][1]][0] = val;
                 }
 
-                return rootIndex;
+                return nodeIndex;
             }
         }
 
 
     /**
      * Searches for a random key  and prints the index at where the key was found
-     * @param rootIndex
+     * @param nodeIndex a variable which points to our nodes and at start points to the root
      * @param val The key to be searched
      * @return Returns the index where the key was or wasn't found
      */
-    public int SearchRandomKey(int rootIndex,int val){
-        if(MultiCounter.increaseCounter(2) && rootIndex == -1){
+    public int SearchRandomKey(int nodeIndex,int val){
+        if(MultiCounter.increaseCounter(2) && nodeIndex == -1){
             System.out.println("Value wasnt found in tree");
-           return rootIndex;
+           return nodeIndex;
         }
-        if(MultiCounter.increaseCounter(2) && val < data[rootIndex][Info]){
-            return SearchRandomKey(data[rootIndex][Left],val);
+        if(MultiCounter.increaseCounter(2) && val < data[nodeIndex][Info]){
+            return SearchRandomKey(data[nodeIndex][Left],val);
         }
-        else if(MultiCounter.increaseCounter(2) && data[rootIndex][Info] == val) {
-            //System.out.println("Found value:"+data[rootIndex][Info]+" at index: "+rootIndex );
-            return rootIndex;
+        else if(MultiCounter.increaseCounter(2) && data[nodeIndex][Info] == val) {
+            //System.out.println("Found value:"+data[rootIndex][Info]+" at index: "+rootIndex ); //It is commented because too many prints are done and the results can't be seen easily
+            return nodeIndex;
         }
         else{
-            return SearchRandomKey(data[rootIndex][Right],val);
+            return SearchRandomKey(data[nodeIndex][Right],val);
         }
 
     }
 
     /**
      * Searches for keys in a given range and everytime a key is found, it is printed out.
-     * @param rootIndex
+     * @param nodeIndex a variable which points to our nodes and at start points to the root
      * @param low
      * @param high
      * @return
      */
-    public int SearchRange(int rootIndex,int low,int high){
-
-        if (MultiCounter.increaseCounter(3) && data[rootIndex][Info] == -1) {
+    public int SearchRange(int nodeIndex,int low,int high){
+        if (MultiCounter.increaseCounter(3) && data[nodeIndex][Info] == -1) {
             return -1;
         }
-
-        if (MultiCounter.increaseCounter(3) && low <=data[rootIndex][Info]) {
-            if(MultiCounter.increaseCounter(3) && data[rootIndex][Left] != -1) {
-                SearchRange(data[rootIndex][Left],low,high);
+        if (MultiCounter.increaseCounter(3) && low <=data[nodeIndex][Info]) {
+            if(MultiCounter.increaseCounter(3) && data[nodeIndex][Left] != -1) {
+                SearchRange(data[nodeIndex][Left],low,high);
             }
         }
-
-        if (MultiCounter.increaseCounter(3) && low <= data[rootIndex][Info] && MultiCounter.increaseCounter(3) && high >= data[rootIndex][Info]) {
+        if (MultiCounter.increaseCounter(3) && low <= data[nodeIndex][Info] && MultiCounter.increaseCounter(3) && high >= data[nodeIndex][Info]) {
             //System.out.print(data[rootIndex][Info] + " ");
         }
-
-        if (MultiCounter.increaseCounter(3) && high >= data[rootIndex][Info]) {
-            if(MultiCounter.increaseCounter(3) && data[rootIndex][Right] != -1) {
-                SearchRange(data[rootIndex][Right],low,high);
+        if (MultiCounter.increaseCounter(3) && high >= data[nodeIndex][Info]) {
+            if(MultiCounter.increaseCounter(3) && data[nodeIndex][Right] != -1) {
+                SearchRange(data[nodeIndex][Right],low,high);
             }
-
         }
-        return rootIndex;
+        return nodeIndex;
     }
 
 
     /**
-     *
-     * @return
+     *Method that takes account the Avail variable and "pops" the first element from stack
+     * @return the next available node that is ready be used
      */
     private int GetNode(){
         MultiCounter.increaseCounter(1,3);
@@ -137,10 +132,8 @@ public class BstArray {
         return treePointer;
     }
 
-
     /**
-     * @param treePointer
-     * @return
+     * Method that frees a node and pushes it in stack declaring that there is an empty space to be used
      */
     private int FreeNode(int treePointer){
         if(data[treePointer][Info] != -1 && data[treePointer][1] != -1 ) {
@@ -156,19 +149,6 @@ public class BstArray {
         }
 
     }
-
-    /**
-     *
-     */
-    public void print(){
-        for(int i=0; i< data.length;i++){
-
-            System.out.println(data[i][Info]);
-            System.out.println(data[i][Left]);
-            System.out.println(data[i][Right]);
-        }
-    }
-
 
     /**
      *Initializes the data array

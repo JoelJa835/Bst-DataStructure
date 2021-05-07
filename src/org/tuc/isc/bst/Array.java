@@ -5,13 +5,14 @@ import org.tuc.isc.util.MultiCounter;
 public class Array {
 
     /**
-     *
+     *Variable holding our keys
      */
     int[] table;
     private static final int Size= 1000000;
 
     /**
-     * @param N
+     * Constructor that initializes the variable table[]
+     * @param N the size of the array
      */
     public Array(int N) {
        this.table = new int[N];
@@ -20,6 +21,7 @@ public class Array {
 
 
     /**
+     * Method that implements the binary search algorithm to find a key
      * @param first
      * @param last
      * @param key
