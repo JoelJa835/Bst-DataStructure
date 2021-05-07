@@ -3,29 +3,31 @@ package org.tuc.isc.bst;
 import org.tuc.isc.util.MultiCounter;
 
 /**
- *
+ *A class that can be used to implement a threaded binary search tree in an array with stack
  */
 public class ThreadedBst {
-
     /**
-     *
+     * Constants that help the code be more organized
      */
     private static final int RightThread = 4;
     private static final int LeftThread = 3;
     private static final int Right = 2;
     private static final int Left = 1;
     private static final int Info = 0;
+    /**
+     * Variables that are needed throughout the class
+     */
     private int[][] data;
-    int parentIndex = -1;
-    int helperPointerRight,helperPointerLeft =0;
-
-    int tmpPointer=-1;
+    private int parentIndex = -1;
+    private int helperPointerRight,helperPointerLeft =0;
+    private int tmpPointer=-1;
     private int Avail =0;
 
 
 
     /**
-     * @param N
+     * Constructor that initializes our data
+     * @param N The size needed to initialize the array  with the data
      */
     public ThreadedBst(int N) {
         this.data = new int[N][5];
@@ -34,30 +36,31 @@ public class ThreadedBst {
 
 
     /**
-     * @param rootIndex
-     * @param val
-     * @return
+     * Insert a random generated key in data array
+     * @param nodeIndex a variable which points to our nodes and at start points to the root
+     * @param val The key that we insert to the array
+     * @return the variable that points to our nodes
      */
-    public  int InsertRandomKey(int rootIndex ,int val) {
-        if(MultiCounter.increaseCounter(4) &&  rootIndex!= -1 && MultiCounter.increaseCounter(5) &&  Avail !=0){
-            if (MultiCounter.increaseCounter(4) && val > data[rootIndex][Info]) {
+    public  int InsertRandomKey(int nodeIndex ,int val) {
+        if(MultiCounter.increaseCounter(4) &&  nodeIndex!= -1 && MultiCounter.increaseCounter(5) &&  Avail !=0){
+            if (MultiCounter.increaseCounter(4) && val > data[nodeIndex][Info]) {
                 MultiCounter.increaseCounter(4);
-                parentIndex = rootIndex;
-                helperPointerRight = data[rootIndex][Right];
-                if(MultiCounter.increaseCounter(4) && data[rootIndex][RightThread]==1) {                     //This check ensures we wont go into infinite recursion
+                parentIndex = nodeIndex;
+                helperPointerRight = data[nodeIndex][Right];
+                if(MultiCounter.increaseCounter(4) && data[nodeIndex][RightThread]==1) {                     //This check ensures we wont go into infinite recursion
                     MultiCounter.increaseCounter(4);
-                    data[rootIndex][Right] = -1;
+                    data[nodeIndex][Right] = -1;
                 }
-                InsertRandomKey(data[rootIndex][Right], val);
+                InsertRandomKey(data[nodeIndex][Right], val);
             } else {
                 MultiCounter.increaseCounter(4);
-                parentIndex = rootIndex;
-                helperPointerLeft = data[rootIndex][Left];
-                if(MultiCounter.increaseCounter(4) && data[rootIndex][LeftThread]==1) {                     //This check ensures we wont go into infinite recursion
+                parentIndex = nodeIndex;
+                helperPointerLeft = data[nodeIndex][Left];
+                if(MultiCounter.increaseCounter(4) && data[nodeIndex][LeftThread]==1) {                     //This check ensures we wont go into infinite recursion
                     MultiCounter.increaseCounter(4);
-                    data[rootIndex][Left] = -1;
+                    data[nodeIndex][Left] = -1;
                 }
-                InsertRandomKey(data[rootIndex][Left], val);
+                InsertRandomKey(data[nodeIndex][Left], val);
             }
         }
         else {
@@ -93,42 +96,43 @@ public class ThreadedBst {
                 data[parentIndex][Left] = tmpPointer;
             }
         }
-        return rootIndex;
+        return nodeIndex;
     }
 
     /**
-     * @param rootIndex
-     * @param val
-     * @return
+     * Search for a random key  and prints the index at where the key was found
+     * @param nodeIndex  variable which points to our nodes and at start points to the root
+     * @param val the key to be searched
+     * @return the index  of the node that was last used or if the key is found  it returns the index to that key
      */
-    public int SearchRandomKey(int rootIndex,int val){
+    public int SearchRandomKey(int nodeIndex,int val){
 
-        while(MultiCounter.increaseCounter(5) && rootIndex!=-1) {
-            if (MultiCounter.increaseCounter(5) &&  data[rootIndex][Info] == val) {
-                //System.out.println("Found value:" + data[rootIndex][Info] + " at index: " + rootIndex);
-                return rootIndex;
+        while(MultiCounter.increaseCounter(5) && nodeIndex!=-1) {
+            if (MultiCounter.increaseCounter(5) &&  data[nodeIndex][Info] == val) {
+                //System.out.println("Found value:" + data[rootIndex][Info] + " at index: " + rootIndex); //It is commented because too many prints are done and the results can't be seen easily
+                return nodeIndex;
             }
-            if(MultiCounter.increaseCounter(5) && data[rootIndex][LeftThread] == 1 && val< data[rootIndex][Info]  || MultiCounter.increaseCounter(5) && data[rootIndex][RightThread]==1 && val > data[rootIndex][Info] ){
+            if(MultiCounter.increaseCounter(5) && data[nodeIndex][LeftThread] == 1 && val< data[nodeIndex][Info]  || MultiCounter.increaseCounter(5) && data[nodeIndex][RightThread]==1 && val > data[nodeIndex][Info] ){
                 System.out.println("Key wasn't found");
                 break;
             }
-            if (MultiCounter.increaseCounter(5) && val < data[rootIndex][Info]) {
+            if (MultiCounter.increaseCounter(5) && val < data[nodeIndex][Info]) {
                 MultiCounter.increaseCounter(5);
-                rootIndex = data[rootIndex][Left];
-            } else if(MultiCounter.increaseCounter(5) && val > data[rootIndex][Info]){
+                nodeIndex= data[nodeIndex][Left];
+            } else if(MultiCounter.increaseCounter(5) && val > data[nodeIndex][Info]){
                 MultiCounter.increaseCounter(5);
-                rootIndex = data[rootIndex][Right];
+                nodeIndex= data[nodeIndex][Right];
             }
         }
-    return rootIndex;
+    return nodeIndex;
     }
 
     /**
-     *
-     * @param rootIndex
-     * @param low
-     * @param high
-     * @return
+     * Search for keys in a given range and everytime a key is found, it is printed out.
+     * @param rootIndex points to the root of our tree
+     * @param low  lower limit of range
+     * @param high higher limir of range
+     * @return the current index
      */
     public int SearchRange(int rootIndex,int low,int high) {
         MultiCounter.increaseCounter(6);
@@ -142,7 +146,7 @@ public class ThreadedBst {
                 if (MultiCounter.increaseCounter(6) && data[curIndex][Info] > high) {
                     break;
                 }
-                //System.out.println(data[curIndex][Info]);
+                //System.out.println(data[curIndex][Info]); //It is commented because too many prints are done and the results can't be seen easily
             }
             if (MultiCounter.increaseCounter(6) && data[curIndex][RightThread] == 1) {
                 MultiCounter.increaseCounter(6);
@@ -157,8 +161,9 @@ public class ThreadedBst {
     }
 
     /**
-     * @param nodeIndex
-     * @return
+     * Method that finds the leftmost node
+     * @param nodeIndex variable which points to our nodes and at start points to the root
+     * @return the variable that points to our nodes(nodeIndex)
      */
     public int leftMostNode(int nodeIndex){
         if(MultiCounter.increaseCounter(6) && nodeIndex==-1){
@@ -173,11 +178,9 @@ public class ThreadedBst {
     }
 
 
-
-
-
     /**
-     * @return
+     * Method that takes account the Avail variable and "pops" the first element from stack
+     * @return the next available node that is ready be used
      */
     private int GetNode(){
         MultiCounter.increaseCounter(5,3);
@@ -189,8 +192,7 @@ public class ThreadedBst {
 
 
     /**
-     * @param treePointer
-     * @return
+     * Method that frees a node and pushes it in stack declaring that there is an empty space to be used
      */
     private int FreeNode(int treePointer){
         if(data[treePointer][Info] != -1 && data[treePointer][1] != -1 ) {
@@ -209,7 +211,7 @@ public class ThreadedBst {
     }
 
     /**
-     *
+     *Initializes the data array
      */
     private  void InitializeArray(){
         for(int i=data.length-1; i>=0; i--){

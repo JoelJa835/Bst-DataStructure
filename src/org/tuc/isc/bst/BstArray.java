@@ -25,7 +25,7 @@ public class BstArray {
 
     /**
      * Constructor that initializes our data
-     * @param N The size needed to initialize array data
+     * @param N The size needed to initialize the array with the data
      */
     public BstArray(int N) {
         this.data = new int[N][3];
@@ -69,7 +69,7 @@ public class BstArray {
 
 
     /**
-     * Searches for a random key  and prints the index at where the key was found
+     * Search for a random key  and prints the index at where the key was found
      * @param nodeIndex a variable which points to our nodes and at start points to the root
      * @param val The key to be searched
      * @return Returns the index where the key was or wasn't found
@@ -93,7 +93,7 @@ public class BstArray {
     }
 
     /**
-     * Searches for keys in a given range and everytime a key is found, it is printed out.
+     * Search for keys in a given range and everytime a key is found, it is printed out.
      * @param nodeIndex a variable which points to our nodes and at start points to the root
      * @param low
      * @param high
