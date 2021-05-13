@@ -42,29 +42,31 @@ public class ThreadedBst {
      * @return the variable that points to our nodes
      */
     public  int InsertRandomKey(int nodeIndex ,int val) {
-        if(MultiCounter.increaseCounter(4) &&  nodeIndex!= -1 && MultiCounter.increaseCounter(5) &&  Avail !=0){
+
+        while(MultiCounter.increaseCounter(4) &&  nodeIndex!= -1 && MultiCounter.increaseCounter(5) &&  Avail !=0){
             if (MultiCounter.increaseCounter(4) && val > data[nodeIndex][Info]) {
-                MultiCounter.increaseCounter(4);
+                MultiCounter.increaseCounter(4,2);
                 parentIndex = nodeIndex;
                 helperPointerRight = data[nodeIndex][Right];
                 if(MultiCounter.increaseCounter(4) && data[nodeIndex][RightThread]==1) {                     //This check ensures we wont go into infinite recursion
                     MultiCounter.increaseCounter(4);
                     data[nodeIndex][Right] = -1;
                 }
-                InsertRandomKey(data[nodeIndex][Right], val);
-            } else {
                 MultiCounter.increaseCounter(4);
+                nodeIndex=data[nodeIndex][Right];
+            } else {
+                MultiCounter.increaseCounter(4,2);
                 parentIndex = nodeIndex;
                 helperPointerLeft = data[nodeIndex][Left];
                 if(MultiCounter.increaseCounter(4) && data[nodeIndex][LeftThread]==1) {                     //This check ensures we wont go into infinite recursion
                     MultiCounter.increaseCounter(4);
                     data[nodeIndex][Left] = -1;
                 }
-                InsertRandomKey(data[nodeIndex][Left], val);
+                MultiCounter.increaseCounter(4);
+                nodeIndex=data[nodeIndex][Left];
             }
         }
-        else {
-            MultiCounter.increaseCounter(4,3);
+            MultiCounter.increaseCounter(4,4);
             tmpPointer = GetNode();
             data[tmpPointer][Info] = val;
             data[tmpPointer][RightThread] = 1;
@@ -95,9 +97,10 @@ public class ThreadedBst {
                 data[parentIndex][LeftThread] = 0;
                 data[parentIndex][Left] = tmpPointer;
             }
-        }
         return nodeIndex;
-    }
+        }
+
+
 
     /**
      * Search for a random key  and prints the index at where the key was found
@@ -137,7 +140,7 @@ public class ThreadedBst {
     public int SearchRange(int rootIndex,int low,int high) {
         MultiCounter.increaseCounter(6);
         int curIndex = SearchRandomKey(rootIndex,low);
-        if(curIndex == -1){
+        if(MultiCounter.increaseCounter(6) &&curIndex == -1){           //If low isn't found, find left most Node and start searching for the next key greater than low.
             MultiCounter.increaseCounter(6);
             curIndex = leftMostNode(rootIndex);
         }

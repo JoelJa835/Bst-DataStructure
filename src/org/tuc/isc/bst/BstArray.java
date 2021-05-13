@@ -40,27 +40,27 @@ public class BstArray {
      * @return the variable that points to our nodes
      */
         public int InsertRandomKey(int nodeIndex, int val) {
-            if (MultiCounter.increaseCounter(1) && this.data[nodeIndex][0] == -1) {
+            if (MultiCounter.increaseCounter(1) && this.data[nodeIndex][Info] == -1) {
                 MultiCounter.increaseCounter(1);
                 this.GetNode();
-                return this.data[nodeIndex][0] = val;
+                return this.data[nodeIndex][Info] = val;
             } else {
-                if (MultiCounter.increaseCounter(1) && val > this.data[nodeIndex][0]) {
-                    if (MultiCounter.increaseCounter(1) && this.data[nodeIndex][2] != -1) {
+                if (MultiCounter.increaseCounter(1) && val > this.data[nodeIndex][Info]) {
+                    if (MultiCounter.increaseCounter(1) && this.data[nodeIndex][Right] != -1) {
                         MultiCounter.increaseCounter(1);
-                        this.data[nodeIndex][2] = this.InsertRandomKey(this.data[nodeIndex][2], val);
+                        this.data[nodeIndex][Right] = this.InsertRandomKey(this.data[nodeIndex][Right], val);
                     } else {
                         MultiCounter.increaseCounter(1, 2);
-                        this.data[nodeIndex][2] = this.GetNode();
-                        this.data[this.data[nodeIndex][2]][0] = val;
+                        this.data[nodeIndex][Right] = this.GetNode();
+                        this.data[this.data[nodeIndex][Right]][Info] = val;
                     }
-                } else if (MultiCounter.increaseCounter(1) && this.data[nodeIndex][1] != -1) {
+                } else if (MultiCounter.increaseCounter(1) && this.data[nodeIndex][Left] != -1) {
                     MultiCounter.increaseCounter(1);
-                    this.data[nodeIndex][1] = this.InsertRandomKey(this.data[nodeIndex][1], val);
+                    this.data[nodeIndex][1] = this.InsertRandomKey(this.data[nodeIndex][Left], val);
                 } else {
                     MultiCounter.increaseCounter(1, 2);
-                    this.data[nodeIndex][1] = this.GetNode();
-                    this.data[this.data[nodeIndex][1]][0] = val;
+                    this.data[nodeIndex][Left] = this.GetNode();
+                    this.data[this.data[nodeIndex][Left]][Info] = val;
                 }
 
                 return nodeIndex;

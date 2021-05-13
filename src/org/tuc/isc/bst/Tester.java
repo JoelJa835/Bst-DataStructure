@@ -93,7 +93,7 @@ public class Tester {
      */
     public void initializeArrayBS(){
         for(int i=0; i<NO_OF_ELEMENTS; i++ ){
-            arr.table[i] = getRandomKeys(NO_OF_ELEMENTS,RandKeys)[i];
+            arr.table[i] = RandKeys[i];
         }
         Arrays.sort(arr.table);
     }
@@ -101,11 +101,28 @@ public class Tester {
      *Method that calls binarySearch method 100 times from class Array
      */
     public void CallBinarySearch(){
+        System.out.println("Initializing Array don't terminate...");
         initializeArrayBS();
+        System.out.println("Initialization finished, search starting.");
         for (int i = 0; i < NO_OF_RANDOM_SEARCHES; i++) {
-            arr.BinarySearch(START_INT, NO_OF_ELEMENTS, RandKeys[i]);
+            arr.BinarySearch(START_INT, NO_OF_ELEMENTS, getRandomKeys(NO_OF_RANDOM_SEARCHES,RandKeys)[i]);
         }
     }
+
+
+    /**
+     * Method that calls BinarySearchRange method 100 times, from class Array
+     * @param K The range to search
+     */
+    public void CallBinarySearchRange(int K){
+        for (int i = 0; i < NO_OF_RANDOM_SEARCHES; i++) {
+            int num = getRandomKeys(NO_OF_RANDOM_SEARCHES,RandKeys)[i];
+            //System.out.println(num+"up to"+ (num+K));
+            arr.BinarySearchRange(num,num+K);
+
+            }
+    }
+
 
     /**
      * Method that fills an array of size n with random generated keys
